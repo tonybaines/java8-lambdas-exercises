@@ -1,0 +1,3 @@
+= Exercises
+
+. Replacements for older Single Abstract Method interfaces file://src/main/java/examples/replacewithlambda/Replacements.java[here]
