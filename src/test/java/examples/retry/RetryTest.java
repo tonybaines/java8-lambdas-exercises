@@ -41,7 +41,7 @@ public class RetryTest {
   }
 
   @Test
-  public void anOperationWhichFailsThenSuceeedsWithinTheRetryLimitReturnsAValue() throws Exception {
+  public void anOperationWhichFailsThenSucceedsWithinTheRetryLimitReturnsAValue() throws Exception {
     final AtomicInteger tries = new AtomicInteger(0);
     Try<String> result = Retry
       .times(3).pausing(1, TimeUnit.SECONDS)
