@@ -1,3 +1,3 @@
 = Exercises
 
-. Replacements for older Single Abstract Method interfaces link:src/main/java/examples/replacewithlambda/Replacements.java[here]
+. Replacements for older Single Abstract Method tests link:src/main/java/examples/replacewithlambda/Replacements.java[here] link:src/main/java/examples/replacewithlambda/ReplacementsTest.java[(test)]
