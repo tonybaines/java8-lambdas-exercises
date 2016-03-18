@@ -7,7 +7,8 @@ repositories {
 dependencies {
   compile([
     'com.javaslang:javaslang:2.0.0-RC3',
-    'com.google.code.tempus-fugit:tempus-fugit:1.1'
+    'com.google.code.tempus-fugit:tempus-fugit:1.1',
+    'com.google.guava:guava:19.0',
   ])
   testCompile([
     'junit:junit:4.12',
