@@ -19,16 +19,13 @@ public class Replacements {
   public static AtomicBoolean thread() {
     final AtomicBoolean running = new AtomicBoolean(true);
     final CountDownLatch counter = new CountDownLatch(2);
-    Thread thread = new Thread(new Runnable() {
-      @Override
-      public void run() {
-        while (counter.getCount() > 0) {
-          System.out.println(Instant.now().toString());
-          sleep(seconds(2));
-          counter.countDown();
-        }
-        running.set(false);
+    Thread thread = new Thread(() -> {
+      while (counter.getCount() > 0) {
+        System.out.println(Instant.now().toString());
+        sleep(seconds(2));
+        counter.countDown();
       }
+      running.set(false);
     });
 
     thread.start();
@@ -41,12 +38,7 @@ public class Replacements {
   public static List<Integer> comparator(List<Integer> src) {
     List<Integer> result = new ArrayList<>(src);
 
-    result.sort(new Comparator<Integer>() {
-      @Override
-      public int compare(Integer o1, Integer o2) {
-        return (o1 % 2) - 1;
-      }
-    });
+    result.sort((o1, o2) -> (o1 % 2) - 1);
     return result;
   }
 
@@ -58,14 +50,11 @@ public class Replacements {
     AtomicInteger evensCount = new AtomicInteger(0);
     AtomicInteger oddsCount = new AtomicInteger(0);
 
-    withIntegers(1, 20, new StuffDoer() {
-      @Override
-      public void doStuffWith(Integer i) {
-        if (i % 2 == 0) {
-          evensCount.incrementAndGet();
-        } else {
-          oddsCount.incrementAndGet();
-        }
+    withIntegers(1, 20, i -> {
+      if (i % 2 == 0) {
+        evensCount.incrementAndGet();
+      } else {
+        oddsCount.incrementAndGet();
       }
     });
 
