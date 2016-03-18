@@ -1,7 +1,8 @@
-package examples.replacewithlambda;
+package examples.replacewithlambda.a;
 
 import com.google.code.tempusfugit.temporal.Timeout;
 import com.google.common.collect.Lists;
+import examples.replacewithlambda.a.Replacements;
 import org.junit.Test;
 
 import java.util.List;

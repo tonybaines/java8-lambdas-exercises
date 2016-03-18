@@ -1,13 +1,11 @@
 package examples.retry;
 
-import com.google.code.tempusfugit.concurrency.ThreadUtils;
-import com.google.code.tempusfugit.temporal.Duration;
 import javaslang.control.Try;
 import javaslang.control.Try.CheckedSupplier;
 
 import java.util.concurrent.TimeUnit;
 
-import static examples.Util.sleepFor;
+import static support.Util.sleepFor;
 
 public final class Retry<T> {
   private final int maxTimes;

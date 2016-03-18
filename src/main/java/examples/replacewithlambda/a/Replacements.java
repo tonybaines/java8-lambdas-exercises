@@ -1,4 +1,4 @@
-package examples.replacewithlambda;
+package examples.replacewithlambda.a;
 
 import java.time.Instant;
 import java.util.ArrayList;
