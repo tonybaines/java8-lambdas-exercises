@@ -23,11 +23,11 @@ public class CollectionsTest {
 
   @Test
   public void averageWordLength() throws Exception {
-    assertThat(Collections.averageWordLength(), is(2L));
+    assertThat(Collections.averageWordLength(), is(3L));
   }
 
   @Test
   public void averageDistinctWordLength() throws Exception {
-    assertThat(Collections.averageDistinctWordLength(), is(7L));
+    assertThat(Collections.averageDistinctWordLength(), is(8L));
   }
 }
