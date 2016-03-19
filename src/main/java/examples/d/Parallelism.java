@@ -8,12 +8,13 @@ import static com.google.common.math.LongMath.factorial;
 import static support.Util.time;
 
 
-public class Parallelism1 {
+public class Parallelism {
 
   public static void main(String[] args) {
 
     /*
       Which is faster?
+      Play with the numbers and the operations
      */
     final int limit = 100000000; // Change the magnitude depending on execution times
     try {
