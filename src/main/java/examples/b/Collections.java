@@ -11,18 +11,18 @@ import java.io.IOException;
  */
 public class Collections {
   public static long countWords() throws IOException {
-    return Sources.words().stream()
+    return Sources.WORDS.stream()
       .count();
   }
 
   public static long distinctWords() throws IOException {
-    return Sources.words().stream()
+    return Sources.WORDS.stream()
       .distinct()
       .count();
   }
 
   public static long longestDistinctWord() throws IOException {
-    return Sources.words().stream()
+    return Sources.WORDS.stream()
       .distinct()
       .max((w1, w2) -> w1.length() - w2.length())
       .get()
@@ -30,14 +30,14 @@ public class Collections {
   }
 
   public static long averageWordLength() throws IOException {
-    return Math.round(Sources.words().stream()
+    return Math.round(Sources.WORDS.stream()
       .mapToInt(String::length)
       .average()
       .getAsDouble());
   }
 
   public static long averageDistinctWordLength() throws IOException {
-    return Math.round(Sources.words().stream()
+    return Math.round(Sources.WORDS.stream()
       .distinct()
       .mapToInt(String::length)
       .average()

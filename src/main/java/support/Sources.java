@@ -6,29 +6,41 @@ import com.google.common.io.Resources;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Sources {
-  public static List<String> fewWords() throws IOException {
-    URL resource = Resources.getResource("Sonnets.txt");
-    return Lists.newArrayList(Resources.toString(resource, Charsets.UTF_8).split("\\s"));
-  }
-  public static Collection<String> moreWords() throws IOException {
-    URL resource = Resources.getResource("Plays.txt");
-    return Lists.newArrayList(Resources.toString(resource, Charsets.UTF_8).split("\\s"));
+
+  public static final List<String> WORDS = wordsFrom("Plays.txt");
+
+
+  public static Stream<String> infiniteWordStream() {
+    return new Random().ints(0, WORDS.size())
+      .mapToObj(WORDS::get);
   }
 
-  public static Stream<String> infiniteWordStream() throws IOException {
-    List<String> words = fewWords();
-    return new Random().ints(0, words.size())
-      .mapToObj(words::get);
+  private static List<String> wordsFrom(String resourceName) {
+    URL resource = Resources.getResource(resourceName);
+    try {
+      return Lists.newArrayList(Resources.toString(resource, Charsets.UTF_8).split("\\s"));
+    } catch (IOException e) {
+      e.printStackTrace();
+      return Collections.emptyList();
+    }
   }
 
-  public static Collection<String> words() throws IOException {
-    return moreWords();
+  public static Stream<Optional<Boolean>> infiniteOptionalBooleansStream() {
+    return new Random().ints(0, 2).mapToObj(i -> {
+        switch (i) {
+          case 0:
+            return Optional.of(true);
+          case 1:
+            return Optional.of(false);
+          default:
+            return Optional.empty();
+        }
+      }
+    );
   }
 
 }
