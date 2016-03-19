@@ -14,7 +14,7 @@ import java.util.Set;
 public class Collections {
   public static long countWords() throws IOException {
     long count = 0;
-    for (String word : Sources.words()) {
+    for (String word : Sources.WORDS) {
       count++;
     }
     return count;
@@ -22,7 +22,7 @@ public class Collections {
 
   public static long distinctWords() throws IOException {
     Set distinctWords = new HashSet<>();
-    for (String word : Sources.words()) {
+    for (String word : Sources.WORDS) {
       distinctWords.add(word);
     }
     return distinctWords.size();
@@ -30,7 +30,7 @@ public class Collections {
 
   public static long longestDistinctWord() throws IOException {
     Set<String> distinctWords = new HashSet<>();
-    for (String word : Sources.words()) {
+    for (String word : Sources.WORDS) {
       distinctWords.add(word);
     }
 
@@ -45,7 +45,7 @@ public class Collections {
   public static long averageWordLength() throws IOException {
     long count = 0;
     long totalLength = 0;
-    for (String word : Sources.words()) {
+    for (String word : Sources.WORDS) {
       count++;
       totalLength = totalLength + word.length();
     }
@@ -54,7 +54,7 @@ public class Collections {
 
   public static long averageDistinctWordLength() throws IOException {
     Set<String> distinctWords = new HashSet<>();
-    for (String word : Sources.words()) {
+    for (String word : Sources.WORDS) {
       distinctWords.add(word);
     }
 
