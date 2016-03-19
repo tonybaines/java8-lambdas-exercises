@@ -1,6 +1,7 @@
 package examples.b;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -35,6 +36,16 @@ public class Extension {
   }
 
 
+
+  /**
+   * Useful utility method for the refactoring
+   * @param a
+   * @param b
+   * @return true if there are any shared members between the two collections
+   */
+  private static boolean hasSharedMembers(Collection a, Collection<Books> b) {
+    return !Sets.intersection(new HashSet(a), new HashSet(b)).isEmpty();
+  }
 
 
   public enum Books {SpotTheDog, Ulysses, Dune, LordOfTheFlies}
