@@ -43,6 +43,16 @@ public class Extension {
     return !Sets.intersection(new HashSet(a), new HashSet(b)).isEmpty();
   }
 
+  /**
+   * Useful utility method for the refactoring
+   * @param a
+   * @param b
+   * @return true if there are any shared members between the two collections
+   */
+  private static boolean hasSharedMembers(Collection a, Collection<Books> b) {
+    return !Sets.intersection(new HashSet(a), new HashSet(b)).isEmpty();
+  }
+
 
   public enum Books {SpotTheDog, Ulysses, Dune, LordOfTheFlies}
 

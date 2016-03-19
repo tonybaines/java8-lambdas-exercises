@@ -24,7 +24,7 @@ public class Optionals {
 
   /**
    * If 'day' occurs in the first 10 random words return a greeting
-   * but what happens if it's not?
+   * but what happens if it's not there?
    *
    * @return
    */
