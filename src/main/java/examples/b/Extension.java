@@ -43,7 +43,7 @@ public class Extension {
    * @param b
    * @return true if there are any shared members between the two collections
    */
-  private static boolean hasSharedMembers(Collection a, Collection<Books> b) {
+  private static boolean hasSharedMembers(Collection a, Collection b) {
     return !Sets.intersection(new HashSet(a), new HashSet(b)).isEmpty();
   }
 
