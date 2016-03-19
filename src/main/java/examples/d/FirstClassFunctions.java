@@ -1,4 +1,4 @@
-package examples.f;
+package examples.d;
 
 public class FirstClassFunctions {
 }

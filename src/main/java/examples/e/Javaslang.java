@@ -1,4 +1,4 @@
-package examples.g;
+package examples.e;
 
 public class Javaslang {
 }
