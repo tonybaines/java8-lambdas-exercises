@@ -1,11 +1,11 @@
 package examples.b;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static examples.b.Extension.Books.*;
 
@@ -22,23 +22,25 @@ public class Extension {
    TODO: Refactor this to use streams
    */
   public static Set<String> getReadersOfBooks(Collection<String> readers, Collection<Books> books, LocalDate date) {
-    DataService dataService = new DataService() {
-    };
+    DataService dataService = new DataService() { };
 
-    Set<String> result = new HashSet<>();
     Map<String, Collection<Books>> data = dataService.getBooksReadOn(date);
-    final Stream<Map.Entry<String, Collection<Books>>> entriesWithReadersOfInterest =
-      data.entrySet().stream()
-        .filter(e -> readers.contains(e.getKey()));
 
-    for (Map.Entry<String, Collection<Books>> e : entriesWithReadersOfInterest.collect(Collectors.toSet())) {
-      for (Books book : books) {
-        if (e.getValue().contains(book)) {
-          result.add(e.getKey());
-        }
-      }
-    }
-    return result;
+    return data.entrySet().stream()
+      .filter(e -> readers.contains(e.getKey()))
+      .filter(e -> hasSharedMembers(books, e.getValue()))
+      .map(Map.Entry::getKey)
+      .collect(Collectors.toSet());
+  }
+
+  /**
+   * Useful utility method for the refactoring
+   * @param a
+   * @param b
+   * @return true if there are any shared members between the two collections
+   */
+  private static boolean hasSharedMembers(Collection a, Collection<Books> b) {
+    return !Sets.intersection(new HashSet(a), new HashSet(b)).isEmpty();
   }
 
 
