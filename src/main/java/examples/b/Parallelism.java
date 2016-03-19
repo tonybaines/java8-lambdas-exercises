@@ -1,4 +1,4 @@
-package examples.d;
+package examples.b;
 
 import support.Sources;
 

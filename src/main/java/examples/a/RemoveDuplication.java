@@ -1,4 +1,4 @@
-package examples.c;
+package examples.a;
 
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;

@@ -1,4 +1,4 @@
-package examples.e;
+package examples.c;
 
 import support.Sources;
 
@@ -28,7 +28,7 @@ public class Optionals {
    *
    * @return
    */
-  public static Optional doYouWantToPlayAGame() throws IOException {
+  public static Optional<String> doYouWantToPlayAGame() throws IOException {
     return Sources.infiniteWordStream()
       .limit(10)
       .filter("day"::equals)
