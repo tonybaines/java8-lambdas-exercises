@@ -39,8 +39,7 @@ public class Optionals {
   public static long yesNoMaybe() {
     return Sources.infiniteOptionalBooleansStream()
       .limit(10)
-      .map(x -> x.orElse(false))
-      .filter(b -> b)
+      .filter(b -> b.orElse(false))
       .count();
   }
 }
