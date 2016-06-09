@@ -13,15 +13,16 @@ package examples;
  *
  *============================================================================*/
 
-import com.google.common.collect.Lists;
+import support.Cafes;
 
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
-import static support.Util.sleepFor;
+import static support.Cafes.Product.Cake;
+import static support.Cafes.Product.Coffee;
+import static support.Util.*;
 
 /*
 @startuml
@@ -55,75 +56,34 @@ end note
  */
 public class CompletableFutures {
   public static void main(String[] args) throws ExecutionException, InterruptedException {
-    final List<CafeService> cafes = Lists.newArrayList(new CafeRoma(), new CakesRUs(), new EvilBeanCafe());
+    log("Start");
 
+    final List<CompletableFuture<String>> results = Cafes.allCafes().stream()
+      .map(cafe -> {
+        // For each cafe, start asynchronous jobs to lookup the price of coffee and cake (and handle errors)
+        final CompletableFuture<Cafes.Price> coffeeFuture = CompletableFuture
+          .supplyAsync(() -> cafe.bestPriceForCoffee())
+          .exceptionally(ex -> Cafes.Price.unavailable(cafe, Coffee, ex.getCause().getMessage()));
+        final CompletableFuture<Cafes.Price> cakeFuture = CompletableFuture
+          .supplyAsync(() -> cafe.bestPriceForCake())
+          .exceptionally(ex -> Cafes.Price.unavailable(cafe, Cake, ex.getCause().getMessage()));
 
-    CompletableFuture first = CompletableFuture.supplyAsync(() -> "First result");
+        // Merge what comes back from the two
+        return coffeeFuture.thenCombine(cakeFuture, (Cafes.Price coffee, Cafes.Price cake) ->
+          String.format("Cafe '%s': %s %.2f, %s %.2f.  Total %.2f", coffee.cafeName, coffee.product, coffee.price, cake.product, cake.price, coffee.price + cake.price));
+      })
+      .collect(Collectors.toList());
 
-    CompletableFuture second = first.thenApply(prev -> prev+".  SecondResult");
+    // As each cafe-result comes in, handle the message
+    results
+      .forEach(result -> result.thenAcceptAsync(msg -> log(msg)));
 
-    // ... time passes
+    // Wait for all to complete
+    log("All requests submitted, waiting for the answers to come back");
+    results.forEach(it -> it.join());
 
-    System.out.println(second.get());
+    log("Done");
 
   }
 
-
-  public abstract static class CafeService {
-    protected abstract double coffeePrice();
-    protected abstract double cakePrice();
-
-    private static Random random = new Random();
-    private static int nextRandom() {return random.nextInt(3);}
-    public double bestPriceForCoffee() {
-      sleepFor(nextRandom(), TimeUnit.SECONDS);
-      return coffeePrice();
-    }
-    public double bestPriceForCake() {
-      sleepFor(nextRandom(), TimeUnit.SECONDS);
-      return cakePrice();
-    }
-  }
-
-  public static class CakesRUs extends CafeService {
-    protected double coffeePrice() {
-      throw new IllegalStateException("Out of Coffee!");
-    }
-
-    protected double cakePrice() {
-      return 0.5;
-    }
-
-    public String toString() {
-      return "Cakes`R Us";
-    }
-  }
-
-  public static class EvilBeanCafe extends CafeService {
-    protected double coffeePrice() {
-      return 2.50;
-    }
-
-    protected double cakePrice() {
-      return 0.99;
-    }
-
-    public String toString() {
-      return "Evil Bean Cafe";
-    }
-  }
-
-  public static class CafeRoma extends CafeService {
-    protected double coffeePrice() {
-      return 2.00;
-    }
-
-    protected double cakePrice() {
-      return 1.20;
-    }
-
-    public String toString() {
-      return "Cafe Roma";
-    }
-  }
 }

@@ -1,13 +1,14 @@
 package examples.streams;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static examples.streams.Extension.Books.*;
+import static support.Util.list;
 
 /**
  * This example taken from Martin Fowler's blog
@@ -40,7 +41,7 @@ public class Extension {
    * @return true if there are any shared members between the two collections
    */
   private static boolean hasSharedMembers(Collection a, Collection b) {
-    return !Sets.intersection(new HashSet(a), new HashSet(b)).isEmpty();
+    return a.stream().anyMatch( x -> b.contains(x));
   }
 
 
@@ -50,17 +51,17 @@ public class Extension {
     default Map<String, Collection<Books>> getBooksReadOn(LocalDate date) {
       final Map<String, Collection<Books>> books = new HashMap<>();
       if (date.equals(MARCH_1)) {
-        books.put("Tom", Lists.newArrayList(SpotTheDog));
-        books.put("Harry", Lists.newArrayList(Dune));
-        books.put("Eric", Lists.newArrayList(SpotTheDog, Ulysses));
+        books.put("Tom", list(SpotTheDog));
+        books.put("Harry", list(Dune));
+        books.put("Eric", list(SpotTheDog, Ulysses));
       } else if (date.equals(MARCH_2)) {
-        books.put("Harry", Lists.newArrayList(Dune));
-        books.put("Eric", Lists.newArrayList(Ulysses));
-        books.put("Ernie", Lists.newArrayList(SpotTheDog));
-        books.put("Bert", Lists.newArrayList(Ulysses, Dune));
+        books.put("Harry", list(Dune));
+        books.put("Eric", list(Ulysses));
+        books.put("Ernie", list(SpotTheDog));
+        books.put("Bert", list(Ulysses, Dune));
       } else if (date.equals(MARCH_3)) {
-        books.put("Ernie", Lists.newArrayList(SpotTheDog, LordOfTheFlies));
-        books.put("Bert", Lists.newArrayList(Dune));
+        books.put("Ernie", list(SpotTheDog, LordOfTheFlies));
+        books.put("Bert", list(Dune));
       }
       return books;
     }

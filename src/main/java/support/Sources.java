@@ -9,6 +9,8 @@ import java.net.URL;
 import java.util.*;
 import java.util.stream.Stream;
 
+import static support.Util.list;
+
 public class Sources {
 
   public static final List<String> WORDS = wordsFrom("Plays.txt");
@@ -22,7 +24,7 @@ public class Sources {
   private static List<String> wordsFrom(String resourceName) {
     URL resource = Resources.getResource(resourceName);
     try {
-      return Lists.newArrayList(Resources.toString(resource, Charsets.UTF_8).split("\\s"));
+      return list(Resources.toString(resource, Charsets.UTF_8).split("\\s"));
     } catch (IOException e) {
       e.printStackTrace();
       return Collections.emptyList();
