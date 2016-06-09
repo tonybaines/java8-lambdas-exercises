@@ -2,14 +2,15 @@ package support;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 import static support.Cafes.Product.Cake;
 import static support.Cafes.Product.Coffee;
 import static support.Util.*;
 
 public class Cafes {
-  public static List<CafeService> allCafes() {
-    return list(new Cafes.CafeRoma(), new Cafes.CakesRUs(), new Cafes.EvilBeanCafe());
+  public static Stream<CafeService> allCafes() {
+    return list(new Cafes.CafeRoma(), new Cafes.CakesRUs(), new Cafes.EvilBeanCafe()).stream();
   }
 
   public enum Product {Coffee, Cake}
