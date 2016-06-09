@@ -1,4 +1,4 @@
-package examples.a;
+package examples;
 
 import com.google.code.tempusfugit.temporal.Timeout;
 import com.google.common.collect.Lists;

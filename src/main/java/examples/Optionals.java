@@ -15,7 +15,7 @@ public class Optionals {
     }
   }
 
-  public Optional<Cat> whatIsInTheBox() {
+  public Optional<Cat> whatsInTheBox() {
     if (new Random().nextInt(1) > 0) {
       return Optional.of(new Cat(Sources.infiniteWordStream().findFirst().get()));
     }
