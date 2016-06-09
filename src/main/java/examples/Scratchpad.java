@@ -1,6 +1,7 @@
 package examples;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.*;
 import java.util.stream.IntStream;
 
@@ -27,29 +28,56 @@ public class Scratchpad {
     final Function<String, Integer> methodReferenceLambdaStringToInteger = String::length;
   }
 
+  /*
+  @startuml
+  (*)->[String]"Consumer<String>"
+  @enduml
+  @startuml
+  (*)->[String]"Function<String, Integer>"
+  "Function<String, Integer>" -> [Integer](*)
+  @enduml
+  @startuml
+  (*)->[(String, String)]"BiFunction<String, String, Integer>"
+  "BiFunction<String, String, Integer>" -> [Integer](*)
+  @enduml
+  @startuml
+  "Supplier<Integer>" -> [Integer](*)
+  @enduml
+
+  @startuml
+  "Supplier<Integer>" --> [Integer]"Function<Integer, String>"
+  "Function<Integer, String>" -->[String]"Function<String, Boolean>"
+  "Function<String, Boolean>"-->[Boolean]"Consumer<Boolean>"
+  @enduml
+
+  @startuml
+  "die1:\nIntSupplier" --> [Integer]"Two Dice:\nBiFunction<IntSupplier, IntSupplier, IntSupplier>"
+  "die2:\nIntSupplier" --> [Integer]"Two Dice:\nBiFunction<IntSupplier, IntSupplier, IntSupplier>"
+  "Two Dice:\nBiFunction<IntSupplier, IntSupplier, IntSupplier>" -->[Integer] "Scoreboard:\nIntConsumer"
+  @enduml
+   */
 
   public static void commonProvidedFunctionTypes() {
 
-    Supplier<Integer> diceRollsAIC = new Supplier<Integer>() {
+    IntSupplier diceRollsAIC = new IntSupplier() {
       @Override
-      public Integer get() {
-        return new Random().nextInt(7)+1;
+      public int getAsInt() {
+        return new Random().nextInt(6)+1;
       }
     };
 
-    Supplier<Integer> diceRollsLambda = () -> new Random().nextInt(7)+1;
-
-
-
-    BiFunction<Supplier<Integer>, Supplier<Integer>, Integer> twoDiceRollsAIC = new BiFunction<Supplier<Integer>, Supplier<Integer>, Integer>() {
+    // A function returning a function!
+    BiFunction<IntSupplier, IntSupplier, IntSupplier> twoDiceRollsAIC = new BiFunction<IntSupplier, IntSupplier, IntSupplier>() {
       @Override
-      public Integer apply(Supplier<Integer> die1, Supplier<Integer> die2) {
-        return die1.get()+die2.get();
+      public IntSupplier apply(IntSupplier die1, IntSupplier die2) {
+        return new IntSupplier() {
+          @Override
+          public int getAsInt() {
+            return die1.getAsInt()+die2.getAsInt();
+          }
+        };
       }
     };
-
-    BiFunction<Supplier<Integer>, Supplier<Integer>, Integer> twoDiceRollsLambda =
-      (die1, die2) -> die1.get()+die2.get();
 
     // Consumers must have side-effects to do anything useful
     // (not pure functions)
@@ -63,25 +91,51 @@ public class Scratchpad {
       }
     };
 
+
+
+
+    IntSupplier diceRollsLambda = () -> new Random().nextInt(6)+1;
+
+    BiFunction<IntSupplier, IntSupplier, IntSupplier> twoDiceRollsLambda =
+      (die1, die2) -> ( () -> die1.getAsInt()+die2.getAsInt() );
+
+    // A class that uses
     class Player {
-      private final Supplier<Integer> twoDice;
-
-      public Player(Supplier<Integer> twoDice) {
-        this.twoDice = twoDice;
+      private final IntSupplier dice;
+      Player(IntSupplier dice) {
+        this.dice = dice;
       }
-
-      public Integer roll() {
-        return twoDice.get();
+      Integer roll() {
+        return dice.getAsInt();
       }
     }
 
+    // Compose the pieces together
+    final Player player = new Player(twoDiceRollsLambda.apply(diceRollsLambda, diceRollsLambda));
 
-    final Supplier<Integer> integerSupplier = () -> twoDiceRollsLambda.apply(diceRollsLambda, diceRollsLambda);
-
-    final Player player = new Player(integerSupplier);
-    IntStream.range(0,10)
+    // Access to an external variable in a lambda needs a final reference (as for AIC)
+    final AtomicInteger totalScore = new AtomicInteger(0);
+    IntStream.range(0,20)
       .map( i -> player.roll())
-      .forEach(scoreboardAIC);
+      .forEach(score -> {
+        // An IntConsumer, in lambda notation
+        // could have used scoreboardAIC here instead
+        System.out.println(String.format("Rolled %d. Total now %d", score, totalScore.addAndGet(score)));
+    });
+
+    /*
+      Extension
+      - roll three, four dice (use the existing functions)
+      - Replace the Player class with a function
+        - first built-in function interfaces
+        - then create your own
+     */
+
+    /*
+      Discussions
+      - Lego brick assembly of functionality
+      - Relative benefits of classes/functions, anonymous/named
+     */
   }
 
   public static void main(String[] args) {
