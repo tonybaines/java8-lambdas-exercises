@@ -2,7 +2,7 @@ package examples.a;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
-import examples.a.RemoveDuplication;
+import examples.RemoveDuplication;
 import org.junit.Test;
 
 import java.io.File;

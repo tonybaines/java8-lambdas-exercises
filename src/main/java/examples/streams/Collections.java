@@ -1,4 +1,4 @@
-package examples.b;
+package examples.streams;
 
 import support.Sources;
 

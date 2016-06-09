@@ -1,4 +1,4 @@
-package examples.c;
+package examples;
 
 import support.Sources;
 

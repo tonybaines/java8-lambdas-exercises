@@ -1,4 +1,4 @@
-package examples.completablefuture;
+package examples;
 
 /*============================================================================*
  * - COPYRIGHT NOTICE -
@@ -13,18 +13,15 @@ package examples.completablefuture;
  *
  *============================================================================*/
 
-import com.google.code.tempusfugit.temporal.Duration;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
-import static com.google.code.tempusfugit.concurrency.ThreadUtils.sleep;
+import static support.Util.sleepFor;
 
 /*
 @startuml
@@ -79,11 +76,11 @@ public class CompletableFutures {
     private static Random random = new Random();
     private static int nextRandom() {return random.nextInt(3);}
     public double bestPriceForCoffee() {
-      sleep(Duration.seconds(nextRandom()));
+      sleepFor(nextRandom(), TimeUnit.SECONDS);
       return coffeePrice();
     }
     public double bestPriceForCake() {
-      sleep(Duration.seconds(nextRandom()));
+      sleepFor(nextRandom(), TimeUnit.SECONDS);
       return cakePrice();
     }
   }
