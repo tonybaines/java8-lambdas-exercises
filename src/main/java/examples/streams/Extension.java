@@ -1,4 +1,4 @@
-package examples.b;
+package examples.streams;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -6,7 +6,7 @@ import com.google.common.collect.Sets;
 import java.time.LocalDate;
 import java.util.*;
 
-import static examples.b.Extension.Books.*;
+import static examples.streams.Extension.Books.*;
 
 /**
  * This example taken from Martin Fowler's blog

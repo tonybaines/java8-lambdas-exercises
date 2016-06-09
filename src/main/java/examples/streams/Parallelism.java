@@ -1,10 +1,7 @@
-package examples.b;
+package examples.streams;
 
 import support.Sources;
 
-import java.math.BigInteger;
-
-import static com.google.common.math.LongMath.factorial;
 import static support.Util.time;
 
 

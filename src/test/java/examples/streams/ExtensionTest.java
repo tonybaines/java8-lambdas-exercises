@@ -1,13 +1,13 @@
-package examples.b;
+package examples.streams;
 
 import com.google.common.collect.Lists;
 import org.junit.Test;
 
 import java.util.Collection;
 
-import static examples.b.Extension.*;
-import static examples.b.Extension.Books.Dune;
-import static examples.b.Extension.Books.SpotTheDog;
+import static examples.streams.Extension.*;
+import static examples.streams.Extension.Books.Dune;
+import static examples.streams.Extension.Books.SpotTheDog;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
