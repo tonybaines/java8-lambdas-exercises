@@ -1,23 +1,11 @@
 package examples.lambdas;
 
-/*============================================================================*
- * - COPYRIGHT NOTICE -
- *
- * Copyright (c) British Telecommunications plc, 2010, All Rights Reserved
- *
- * The information contained herein and which follows is proprietary
- * information and is the property of BT. This information is not to be
- * divulged, released, copied, reproduced, or conveyed to unauthorised
- * personnel,companies or other institutions without the direct and expressed
- * approval in writing of BT
- *
- *============================================================================*/
-
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 import java.util.function.IntConsumer;
 import java.util.function.IntSupplier;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 public class CommonProvidedFunctionTypes {
@@ -63,7 +51,7 @@ public class CommonProvidedFunctionTypes {
         BiFunction<IntSupplier, IntSupplier, IntSupplier> twoDiceRollsLambda =
                 (die1, die2) -> ( () -> die1.getAsInt()+die2.getAsInt() );
 
-        // A class that uses
+        // A class that uses the 'dice'
         class Player {
             private final IntSupplier dice;
             Player(IntSupplier dice) {
@@ -87,18 +75,37 @@ public class CommonProvidedFunctionTypes {
                     System.out.println(String.format("Rolled %d. Total now %d", score, totalScore.addAndGet(score)));
                 });
 
-    /*
-      Extension
-      - roll three, four dice (use the existing functions)
-      - Replace the Player class with a function
-        - first built-in function interfaces
-        - then create your own
-     */
+        /*
+          Extension
+          - roll three, four dice (use the existing functions)
+          - Replace the Player class with a function
+            - first built-in function interfaces
+            - then create your own
+         */
+        final Player playerThreeDice = new Player(twoDiceRollsLambda.apply(
+          twoDiceRollsLambda.apply(diceRollsLambda, diceRollsLambda),
+          diceRollsLambda)
+        );
 
-    /*
-      Discussions
-      - Lego brick assembly of functionality
-      - Relative benefits of classes/functions, anonymous/named
-     */
+        final Player playerFourDice = new Player(
+          twoDiceRollsLambda.apply(
+            twoDiceRollsLambda.apply(diceRollsLambda, diceRollsLambda),
+            twoDiceRollsLambda.apply(diceRollsLambda, diceRollsLambda)
+          )
+        );
+
+        final IntSupplier playerAsIntSupplier = () -> twoDiceRollsLambda.apply(diceRollsLambda, diceRollsLambda).getAsInt();
+
+        final PlayerSAM playerSAM = () -> twoDiceRollsLambda.apply(diceRollsLambda, diceRollsLambda).getAsInt();
+
+        /*
+          Discussions
+          - Lego brick assembly of functionality
+          - Relative benefits of classes/functions, anonymous/named
+         */
+    }
+
+    public interface PlayerSAM {
+        int roll();
     }
 }
