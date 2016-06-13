@@ -1,4 +1,4 @@
-package examples.a;
+package examples.extra;
 
 import java.time.Instant;
 import java.util.ArrayList;
