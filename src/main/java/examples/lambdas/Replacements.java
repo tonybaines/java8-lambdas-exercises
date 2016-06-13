@@ -1,4 +1,4 @@
-package examples;
+package examples.lambdas;
 
 import java.time.Instant;
 import java.util.ArrayList;

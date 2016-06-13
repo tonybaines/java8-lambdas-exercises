@@ -1,60 +1,17 @@
-package examples;
-
-/*============================================================================*
- * - COPYRIGHT NOTICE -
- *
- * Copyright (c) British Telecommunications plc, 2010, All Rights Reserved
- *
- * The information contained herein and which follows is proprietary
- * information and is the property of BT. This information is not to be
- * divulged, released, copied, reproduced, or conveyed to unauthorised
- * personnel,companies or other institutions without the direct and expressed
- * approval in writing of BT
- *
- *============================================================================*/
+package examples.futures;
 
 import com.google.common.collect.Lists;
 import support.Cafes;
 
+import java.time.Instant;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 import static support.Cafes.Product.Cake;
 import static support.Cafes.Product.Coffee;
 import static support.Util.*;
 
-/*
-@startuml
-
-note left of Client
-  I want coffee and cake!
-end note
-
-== Coffee First ==
-Client -> Service1: bestPriceForCoffee()
-Client <-- Service1: £2.50
-Client -> Service2: bestPriceForCoffee()
-Client <-- Service2: £2.10
-Client -> Service3: bestPriceForCoffee()
-Client <-- Service3: OUT-OF-BEAN-ERROR!
-
-== Then Cake ==
-Client -> Service1: bestPriceForCake()
-Client <-- Service1: £0.99
-Client -> Service2: bestPriceForCake()
-Client <-- Service2: £1.20
-Client -> Service3: bestPriceForCake()
-Client <-- Service3: £0.50
-
-note left of Client
-  Choose based
-  on price
-end note
-
-@enduml
- */
 public class CompletableFutures {
   public static void main(String[] args) throws ExecutionException, InterruptedException {
     log("Start");

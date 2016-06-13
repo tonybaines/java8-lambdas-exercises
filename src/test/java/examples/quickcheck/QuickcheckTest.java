@@ -2,9 +2,8 @@ package examples.quickcheck;
 
 import com.pholser.junit.quickcheck.Property;
 import com.pholser.junit.quickcheck.generator.InRange;
-import com.pholser.junit.quickcheck.generator.Size;
 import com.pholser.junit.quickcheck.runner.JUnitQuickcheck;
-import examples.Replacements;
+import examples.lambdas.Replacements;
 
 import java.util.List;
 
