@@ -2,7 +2,6 @@ package examples.lambdas;
 
 import com.google.code.tempusfugit.temporal.Timeout;
 import com.google.common.collect.Lists;
-import examples.extra.Replacements;
 import org.junit.Test;
 
 import java.util.List;
