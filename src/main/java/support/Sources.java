@@ -7,6 +7,7 @@ import com.google.common.io.Resources;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static support.Util.list;
@@ -24,7 +25,11 @@ public class Sources {
   private static List<String> wordsFrom(String resourceName) {
     URL resource = Resources.getResource(resourceName);
     try {
-      return list(Resources.toString(resource, Charsets.UTF_8).split("\\s"));
+      return list(Resources.toString(resource, Charsets.UTF_8)
+              .split("\\s")).stream()
+              .map(w -> w.replaceAll("[,\\.\\-\\s\\[\\];:]", "").trim())
+              .filter(w -> !w.isEmpty())
+              .collect(Collectors.toList());
     } catch (IOException e) {
       e.printStackTrace();
       return Collections.emptyList();

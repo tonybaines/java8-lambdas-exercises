@@ -8,15 +8,15 @@ import java.util.Random;
 
 public class Optionals {
 
-  public class Cat {
+  public static class Cat {
     public final String name;
     public Cat(String name) {
       this.name = name;
     }
   }
 
-  public Optional<Cat> whatsInTheBox() {
-    if (new Random().nextInt(1) > 0) {
+  public static Optional<Cat> whatsInTheBox() {
+    if (new Random().nextInt(3) > 0) {
       return Optional.of(new Cat(Sources.infiniteWordStream().findFirst().get()));
     }
     else return Optional.empty();

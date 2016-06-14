@@ -1,8 +1,7 @@
-package examples;
+package examples.extra;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
-import examples.extra.RemoveDuplication;
 import org.junit.Test;
 
 import java.io.File;

@@ -3,6 +3,12 @@ package examples.interfaces;
 import com.google.common.collect.Lists;
 
 public class InterfaceDefaultMethods {
+    /* Discussion points
+     *  - can reuse through inheritance (what does that mean for the size of the parent class?
+     *    what about reuse in other inheritance heirarchies?)
+     *  - can reuse through static helper methods in another class (what about overriding behaviour?)
+     *  - contrast clarity of interface implementation (declarative) with inheritance or static imports
+     */
 
     public static void main(String[] args) {
         Lists.newArrayList(new Duck(), new Penguin(), new Ostrich(), new Dolphin(), new Orangutan(), new Tiger())
@@ -89,7 +95,7 @@ public class InterfaceDefaultMethods {
     /**
      * Orangutan can climb, walk
      */
-    public static class Orangutan extends Animal implements Climb, Walk{
+    public static class Orangutan extends Animal implements Climb, Walk {
         void doMove() {
             climb();
             walk();
