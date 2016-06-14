@@ -8,8 +8,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.google.code.tempusfugit.concurrency.ThreadUtils.sleep;
-import static com.google.code.tempusfugit.temporal.Duration.seconds;
+import static java.util.concurrent.TimeUnit.SECONDS;
+import static support.Util.sleepFor;
 
 public class Replacements {
 
@@ -24,7 +24,7 @@ public class Replacements {
       public void run() {
         while (counter.getCount() > 0) {
           System.out.println(Instant.now().toString());
-          sleep(seconds(2));
+          sleepFor(2, SECONDS);
           counter.countDown();
         }
         running.set(false);
