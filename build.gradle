@@ -20,7 +20,7 @@ dependencies {
 }
 
 wrapper {
-  gradleVersion = '2.13'
+  gradleVersion = '2.14'
 }
 
 task copyToLib(type: Copy) {
