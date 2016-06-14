@@ -1,3 +1,0 @@
-= Exercises
-
-. examples.Replacements for older Single Abstract Method tests link:src/main/java/examples/replacewithlambda/examples.Replacements.java[here] link:src/test/java/examples/replacewithlambda/ReplacementsTest.java[(test)]

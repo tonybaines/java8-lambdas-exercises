@@ -8,22 +8,22 @@ import static org.junit.Assert.*;
 public class CollectionsTest {
   @Test
   public void countWords() throws Exception {
-    assertThat(Collections.countWords(), is(1410671L));
+    assertThat(Collections.countWords(), is(903976L));
   }
 
   @Test
   public void countDistinctWords() throws Exception {
-    assertThat(Collections.distinctWords(), is(67781L));
+    assertThat(Collections.distinctWords(), is(42527L));
   }
 
   @Test
   public void longestDistinctWord() throws Exception {
-    assertThat(Collections.longestDistinctWord(), is(40L));
+    assertThat(Collections.longestDistinctWord(), is(37L));
   }
 
   @Test
   public void averageWordLength() throws Exception {
-    assertThat(Collections.averageWordLength(), is(2L));
+    assertThat(Collections.averageWordLength(), is(4L));
   }
 
   @Test
