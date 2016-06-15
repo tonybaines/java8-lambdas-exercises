@@ -9,8 +9,10 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.arrayWithSize;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assume.assumeThat;
 
 @org.junit.runner.RunWith(JUnitQuickcheck.class)
 public class QuickcheckTest {
@@ -29,11 +31,11 @@ public class QuickcheckTest {
   // Annotations can restrict built-in generators
   @Property public void integerDivision(int x, @InRange(minInt = 1) int y) {
     // Needs an additional precondition because of integer truncation
-    if (x >= y) {
-      final int actual = x / y;
-      System.out.println(String.format("%d / %d = %d", x, y, actual));
-      assertThat(actual, is(not(0)));
-    }
+    assumeThat(x >= y, is(true));
+
+    final int actual = x / y;
+    System.out.println(String.format("%d / %d = %d", x, y, actual));
+    assertThat(actual, is(not(0)));
   }
 
 
