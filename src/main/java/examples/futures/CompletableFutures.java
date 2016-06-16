@@ -18,8 +18,8 @@ public class CompletableFutures {
     final List<CompletableFuture<String>> results = Cafes.allCafes()
       .map(cafe -> {
         // For each cafe, start asynchronous jobs to lookup the price of coffee and cake (and handle errors)
-        final CompletableFuture<Cafes.Price> coffeeFuture = ???;
-        final CompletableFuture<Cafes.Price> cakeFuture = ???;
+        final CompletableFuture<Cafes.Price> coffeeFuture = null /*= ???*/;
+        final CompletableFuture<Cafes.Price> cakeFuture = null/*???*/;
 
         // Merge what comes back from the two separate calls
         return coffeeFuture.thenCombine(cakeFuture, (Cafes.Price coffee, Cafes.Price cake) ->
@@ -30,7 +30,7 @@ public class CompletableFutures {
 
     // As each cafe-result comes in, handle the message as soon as it's available
     results
-      .forEach(result -> ???);
+      .forEach(result -> System.out.println(/*???*/));
 
 
     log("All requests submitted, waiting for the answers to come back");

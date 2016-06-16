@@ -32,7 +32,7 @@ public class InterfaceDefaultMethods {
      */
     public static class Duck extends Animal {
         void doMove() {
-            ???
+            /*???*/
         }
     }
 
@@ -41,7 +41,7 @@ public class InterfaceDefaultMethods {
      */
     public static class Penguin extends Animal {
         void doMove() {
-            ???
+            /*???*/
         }
     }
 
@@ -50,7 +50,7 @@ public class InterfaceDefaultMethods {
      */
     public static class Ostrich extends Animal {
         void doMove() {
-            ???
+            /*???*/
         }
     }
 
@@ -59,7 +59,7 @@ public class InterfaceDefaultMethods {
      */
     public static class Dolphin extends Animal {
         void doMove() {
-            ???
+            /*???*/
         }
     }
 
@@ -68,7 +68,7 @@ public class InterfaceDefaultMethods {
      */
     public static class Orangutan extends Animal {
         void doMove() {
-            ???
+            /*???*/
         }
     }
 
@@ -77,7 +77,7 @@ public class InterfaceDefaultMethods {
      */
     public static class Tiger extends Animal {
         void doMove() {
-            ???
+            /*???*/
         }
     }
 

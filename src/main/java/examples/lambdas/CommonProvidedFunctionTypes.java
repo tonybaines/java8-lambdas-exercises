@@ -10,20 +10,20 @@ import java.util.stream.IntStream;
 public class CommonProvidedFunctionTypes {
 
     public static void main(String[] args) {
-        IntSupplier diceRollsAIC = new IntSupplier() {
+        IntSupplier diceRollsAIC = null;/*new IntSupplier() {
             // implement the interface method to return a random number between 1 and 6
-        };
+        };*/
 
         // A function returning a function!
-        BiFunction<IntSupplier, IntSupplier, IntSupplier> twoDiceRollsAIC = new BiFunction<IntSupplier, IntSupplier, IntSupplier>() {
+        BiFunction<IntSupplier, IntSupplier, IntSupplier> twoDiceRollsAIC = null;/*new BiFunction<IntSupplier, IntSupplier, IntSupplier>() {
             // implement the interface method to return a *function* that combines the output of two other functions
-        };
+        };*/
 
         // Consumers must have side-effects to do anything useful
         // (not pure functions)
-        IntConsumer scoreboardAIC = new IntConsumer() {
+        IntConsumer scoreboardAIC = null;/*new IntConsumer() {
             // implement the interface method to keep and print a running total
-        };
+        };*/
 
 
 
@@ -44,7 +44,7 @@ public class CommonProvidedFunctionTypes {
         }
 
         // Compose the pieces together
-        final Player player = new Player(???);
+        final Player player = null;//new Player(/*???*/);
 
         // Access to an external variable in a lambda needs a final reference (as for AIC)
         final AtomicInteger totalScore = new AtomicInteger(0);
